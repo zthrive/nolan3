@@ -91,7 +91,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '1553541550';
+    var serviceWorkerVersion = '2215112713';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -140,6 +140,10 @@
               loadMainDartJs();
             }
           });
+
+        window.addEventListener('flutter-first-frame', function () {
+          navigator.serviceWorker.register('flutter_service_worker.js?v=2215112713');
+        });
 
         // If service worker doesn't succeed in a reasonable amount of time,
         // fallback to plaint <script> tag.
