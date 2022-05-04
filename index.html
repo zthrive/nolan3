@@ -91,7 +91,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '4255653224';
+    var serviceWorkerVersion = '151568201';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -112,7 +112,8 @@
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.
         var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
-        navigator.serviceWorker.register(serviceWorkerUrl)
+        console.log('Service worker url is ' + serviceWorkerUrl + '  ...');
+        navigator.serviceWorker.register('./serviceWorkerUrl')
           .then((reg) => {
             function waitForActivation(serviceWorker) {
               serviceWorker.addEventListener('statechange', () => {
@@ -148,7 +149,7 @@
             );
             loadMainDartJs();
           }
-        }, 7000);
+        }, 10000);
       });
     } else {
       console.log('Service workers are not supported ...');
