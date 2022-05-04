@@ -91,7 +91,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '786885287';
+    var serviceWorkerVersion = '3874308209';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -115,6 +115,7 @@
         console.log('Service worker url is ' + serviceWorkerUrl + '  ...');
         navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
+            console.log('ServiceWorker registration successful with scope: ', reg.scope);
             function waitForActivation(serviceWorker) {
               serviceWorker.addEventListener('statechange', () => {
                 if (serviceWorker.state == 'activated') {
@@ -149,7 +150,7 @@
             );
             loadMainDartJs();
           }
-        }, 100000);
+        }, 10000);
       });
     } else {
       console.log('Service workers are not supported ...');
