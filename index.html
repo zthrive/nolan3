@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+  -->
+  <base href=".">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="A new Flutter project.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="nolan2">
+  <link rel="apple-touch-icon" href="icons/ic_launcher.png">
+
+  <title>nolan2</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+
+  <script>
+    if (window.location.hostname == "localhost")
+      self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+  </script>
+
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/build/pdf.worker.min.js";
+    pdfRenderOptions = {
+      cMapUrl: 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.7.570/cmaps/',
+      cMapPacked: true,
+    }
+  </script>
+  <script>
+    // TODO: Replace the following with your app's Firebase project configuration.
+    // See: https://support.google.com/firebase/answer/7015592
+    // const { initializeApp } = require("firebase/app");
+    // const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");
+
+    let firebaseConfig = {
+      apiKey: "AIzaSyA_B4DLDQApDa0us4gi-58sk_aLMGgFWdI",
+      authDomain: "nolan-2bb99.firebaseapp.com",
+      databaseURL: "https://nolan-2bb99.firebaseio.com",
+      projectId: "nolan-2bb99",
+      storageBucket: "nolan-2bb99.appspot.com",
+      messagingSenderId: "471437598597",
+      appId: "1:471437598597:web:694bd6b998c03caa40aeec",
+      measurementId: "G-WK8ZGC3DSR"
+    };
+
+
+
+    // // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+
+    console.log('After InitialiseApp  .... ');
+
+   // const appCheck = firebase.appCheck();
+    // Pass your reCAPTCHA v3 site key (public key) to activate(). Make sure this
+    // key is the counterpart to the secret key you set in the Firebase console.
+    // appCheck.activate(
+    //   '6LeqFFIeAAAAAM8yFVJ_sN8Vtx7oqKZ00rcwG7q_',
+
+    //   // Optional argument. If true, the SDK automatically refreshes App Check
+    //   // tokens as needed.
+    //   true);
+
+    // const token = firebase.appCheck().getToken(true);
+
+    // console.log('AppCheckinitialised,' + token + ' is Messaging to be initialised next .... ');
+
+
+  </script>
+
+  <script>
+    var serviceWorkerVersion = '4255653224';
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      console.log('Service workers are supported ...');
+      // Service workers are supported. Use them.
+      window.addEventListener('load', function () {
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        navigator.serviceWorker.register(serviceWorkerUrl)
+          .then((reg) => {
+            function waitForActivation(serviceWorker) {
+              serviceWorker.addEventListener('statechange', () => {
+                if (serviceWorker.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              });
+            }
+            if (!reg.active && (reg.installing || reg.waiting)) {
+              // No active web worker and we have installed or are installing
+              // one for the first time. Simply wait for it to activate.
+              waitForActivation(reg.installing ?? reg.waiting);
+            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+              // When the app updates the serviceWorkerVersion changes, so we
+              // need to ask the service worker to update.
+              console.log('New service worker available.');
+              reg.update();
+              waitForActivation(reg.installing);
+            } else {
+              // Existing service worker is still good.
+              console.log('Loading app from service worker.');
+              loadMainDartJs();
+            }
+          });
+
+        // If service worker doesn't succeed in a reasonable amount of time,
+        // fallback to plaint <script> tag.
+        setTimeout(() => {
+          if (!scriptLoaded) {
+            console.warn(
+              'Failed to load app from service worker. Falling back to plain <script> tag.',
+            );
+            loadMainDartJs();
+          }
+        }, 7000);
+      });
+    } else {
+      console.log('Service workers are not supported ...');
+
+      // Service workers not supported. Just drop the <script> tag.
+      loadMainDartJs();
+    }
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+  <script type="text/javascript">
+    pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+  </script>
+  <!-- <script src="main.dart.js" type="application/javascript"></script> -->
+
+</body>
+
+</html>
