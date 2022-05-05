@@ -98,7 +98,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '366342479';
+    var serviceWorkerVersion = '1858295911';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -120,7 +120,9 @@
         // potentially different versions.
         var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
         console.log('Service worker url is ' + serviceWorkerUrl + '  ...');
-        navigator.serviceWorker.register(serviceWorkerUrl)
+        navigator.serviceWorker.register('/nolan3/flutter_service_worker.js', { scope: '/nolan3/' })
+
+          // navigator.serviceWorker.register(serviceWorkerUrl)
           .then((reg) => {
             console.log('ServiceWorker registration successful with scope: ', reg.scope);
             function waitForActivation(serviceWorker) {
