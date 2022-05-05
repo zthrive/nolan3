@@ -97,7 +97,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '2304782908';
+    var serviceWorkerVersion = '3826202442';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
@@ -117,7 +117,7 @@
         // Wait for registration to finish before dropping the <script> tag.
         // Otherwise, the browser will load the script multiple times,
         // potentially different versions.
-        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        var serviceWorkerUrl = '/flutter_service_worker.js?v=' + serviceWorkerVersion;
         console.log('Service worker url is ' + serviceWorkerUrl + '  ...');
 
         navigator.serviceWorker.register(serviceWorkerUrl)
