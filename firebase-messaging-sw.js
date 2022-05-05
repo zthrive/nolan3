@@ -1,12 +1,22 @@
 
 
 // importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-app.js');
-importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-messaging.js');
+// importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-messaging.js');
+
+const cacheName = 'v1';
+const cacheFiles = [
+    '/',
+    '/css/styles.css',
+    '/images/test1.png',
+    '/images/test2.png',
+    '/js/app.js',
+    '/js/sw-registration.js'
+]
 
  // Give the service worker access to Firebase Messaging.
  // Note that you can only use Firebase Messaging here. Other Firebase libraries
  // are not available in the service worker.
-//  importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-app-compat.js');
+ importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-app-compat.js');
  importScripts('https://www.gstatic.com/firebasejs/9.2.0/firebase-messaging-compat.js');
 
 
@@ -46,4 +56,45 @@ messaging.onBackgroundMessage(function(payload) {
 
   self.registration.showNotification(notificationTitle,
     notificationOptions);
+});
+
+
+// Install event
+self.addEventListener('install', function(event) {
+    console.log("SW installed");
+    event.waitUntil(
+        caches.open(cacheName)
+        .then(function(cache){
+            console.log('SW caching cachefiles');
+            return cache.addAll(cacheFiles);
+        })
+    )
+});
+
+// Activate event
+self.addEventListener('activate', function(event) {
+    console.log("SW activated");
+    event.waitUntil(
+        caches.keys()
+        .then(function(cacheNames){
+            return Promise.all(cacheNames.map(function(thisCacheName){
+                if(thisCacheName !== cacheName){
+                    console.log('SW Removing cached files from', thisCacheName);
+                    return caches.delete(thisCacheName);
+                }
+            }))
+        })
+    )
+});
+
+// Fetch event
+self.addEventListener('fetch', function(event) {
+    console.log("SW fetching", event.request.url);
+    event.respondWith(
+        caches.match(event.request)
+        .then(function(response){
+            console.log('Fetching new files');
+            return response || fetch(event.request);
+        })
+    );
 });

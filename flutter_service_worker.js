@@ -78,13 +78,13 @@ const RESOURCES = {
 "canvaskit/profiling/canvaskit.js": "ae2949af4efc61d28a4a80fffa1db900",
 "canvaskit/profiling/canvaskit.wasm": "95e736ab31147d1b2c7b25f11d4c32cd",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
-"firebase-messaging-sw.js": "bd047bbfba4c9823080d11433493a449",
+"firebase-messaging-sw.js": "f812f00cd7fc4359c59810cdaa759909",
 "icons/Icon-192.png": "ac9a721a12bbc803b44f645561ecb1e1",
 "icons/Icon-512.png": "96e752610906ba2a93c65f8abe1645f1",
 "icons/ic_launcher.png": "41cc3beaa663c89ec59216832485bc96",
 "icons/ms-icon-310x310.png": "1e3ed29f39b2e36dd2ba73877666e4ec",
-"index.html": "304e5ca963809b26862020b554855e32",
-"/": "304e5ca963809b26862020b554855e32",
+"index.html": "15e13bd5067e244f816a1d142ad4b81d",
+"/": "15e13bd5067e244f816a1d142ad4b81d",
 "main.dart.js": "8a94f8157e6772cc3aef13909efff3f4",
 "manifest.json": "ccfc140e0166b78756860f9cf85b6613",
 "version.json": "379a381ec022ca41443e4228b0cf14cb"
@@ -93,7 +93,7 @@ const RESOURCES = {
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
-  "/",
+  "./",
 "main.dart.js",
 "index.html",
 "assets/NOTICES",
