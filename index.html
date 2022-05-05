@@ -12,7 +12,13 @@
     For more details:
     * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
   -->
-  <base href=".">
+  <script>
+    if (window.location.hostname == "localhost")
+      <base href="/"></base>
+    else
+      <base href="."></base>
+  </script>
+
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
@@ -30,10 +36,10 @@
 
 <body>
 
-  <script>
+  <!-- <script>
     if (window.location.hostname == "localhost")
       self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
-  </script>
+  </script> -->
 
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app-check.js"></script>
@@ -52,8 +58,8 @@
   <script>
     // TODO: Replace the following with your app's Firebase project configuration.
     // See: https://support.google.com/firebase/answer/7015592
-    // const { initializeApp } = require("firebase/app");
-    // const { initializeAppCheck, ReCaptchaV3Provider } = require("firebase/app-check");
+    // const {initializeApp} = require("firebase/app");
+    // const {initializeAppCheck, ReCaptchaV3Provider} = require("firebase/app-check");
 
     let firebaseConfig = {
       apiKey: "AIzaSyA_B4DLDQApDa0us4gi-58sk_aLMGgFWdI",
@@ -91,7 +97,7 @@
   </script>
 
   <script>
-    var serviceWorkerVersion = '2426745386';
+    var serviceWorkerVersion = '1982125864';
     var scriptLoaded = false;
     function loadMainDartJs() {
       if (scriptLoaded) {
